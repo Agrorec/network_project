@@ -13,6 +13,4 @@
 
 Val : Server NAS
 
-&nbsp;
-
 Sac : VPN
