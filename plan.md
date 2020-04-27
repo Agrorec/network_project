@@ -4,8 +4,7 @@
 
 1. VPN 
 2. Server NAS
-3. Serveur Web
-4. Backup
+3. Backup
 
 ---
 
@@ -21,9 +20,6 @@ Sac : VPN
 * FTP(2), VSFTPD(2), SFTP(1) = Protocole d'écahnge
 
 * Samba = Accés local avec VPN
-https://pimylifeup.com/raspberry-pi-samba/
 
 ### VPN :
 * Wireguard
-
-* OpenVPN
