@@ -1,4 +1,4 @@
-#Documentation sur l'architecture du projet
+# Documentation sur l'architecture du projet
 
 L'objectif est de mettre ne place un VPN pour se relier à un serveur NAS sécurisé en local.
 
