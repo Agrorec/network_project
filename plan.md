@@ -4,15 +4,14 @@
 
 1. VPN 
 2. Server NAS
-3. Backup
 
 ---
 
 ## Répartition des tâches
 
-Val : Server NAS
+Valentin : Server NAS
 
-Sac : VPN
+Sacha : VPN
 
 ## Ressources
 
@@ -22,4 +21,4 @@ Sac : VPN
 * Samba = Accés local avec VPN
 
 ### VPN :
-* Wireguard
+* OpenVPN
