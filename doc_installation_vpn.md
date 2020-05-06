@@ -1,16 +1,24 @@
-# OpenVPN :
+# Installation d'un VPN
+
+- [OpenVPN] : 
+- [Wireguard] : 
+
+## OpenVPN
 Tout d'abord il y a plusieurs façon d'installer OpenVPN, on peut le faire à la mano, ou encore utiliser PIVPN, ou alors on peut utilser une technique digne des plus grands flemmard (Il vaut mieux s'assurer de comprendre comment un VPN fonctionne avant d'utiliser cette technique) :
 On va utiliser le dernier exemple pour cela on part d'une VM Debian vierge coonecter en réseau host-only:
 
 
-## Prérequis :
+### Prérequis :
 Premièrement il est important d'ouvrir un port sur sa box.
 &nbsp;
 Pour cela ouvrer votre navigateur web puis taper `192.168.1.1` ou `192.168.1.254`, connecter vous avec l'identifiant `admin` et les huits premiers caractères du mot de passe de votre box.
 &nbsp;
 Rendez-vous dans la partie `Réseaux`, puis `NAT/PAT`, enfin choississez le port de votre choix (ici de préférence le 1194), pour le protocole choississez les deux, (ou ici de préférence UDP), enfin dans appareil choississez votre VM
 
+---
+
 &nbsp;
+
 Tout d'abord on tape la commande :
 ```bash
 wget git.io/vpn -O openvpn_install.sh && bash openvpn_install.sh
@@ -69,3 +77,40 @@ Appuyez de nouveau sur `Entrée` et comme par magie votre vpn va se monter.
 Maintenant on peut copier coller le contenue de `clientVPN` ou le transferer sur un autre PC, et lancer le fichier de config `client OpenVPN` depuis un autre réseaux et vérifier que la connexion s'établit bien.
 
 Bien joué votre VPN est bien monté 
+
+&nbsp; 
+
+---
+
+## Wireguard
+Wireguard est le dernier en terme de VPN open-source, il est performant, facile à prendre en main etc...
+
+### Prérequis :
+Premièrement il est important d'ouvrir un port sur sa box.
+&nbsp;
+Pour cela ouvrer votre navigateur web puis taper `192.168.1.1` ou `192.168.1.254`, connecter vous avec l'identifiant `admin` et les huits premiers caractères du mot de passe de votre box.
+&nbsp;
+Rendez-vous dans la partie `Réseaux`, puis `NAT/PAT`, enfin choississez le port de votre choix, pour le protocole choississez les deux, enfin dans appareil choississez votre VM.
+
+&nbsp;
+De plus il faudra installer wireguard pour cela je vous renvoi sur la doc officielle https://www.wireguard.com/install/
+
+---
+
+### Génération des clés publique et privée
+Tout d'abord on va commencer par générer les clés privées et publique sur la machine serveur. Pour cela on se rend dans `/etc/wireguard` puis on tape la commande :
+```bash
+wg genkey | tee public.key | wg pubkey > public.key
+```
+
+---
+
+### Création du fichier de configuration du serveur
+
+Premièrement dans le dossier `/etc/wireguard` on crée un fichier `wg0.conf`.
+À l'intérieur on va configurer l'interface :
+```bash
+[Interface]
+Address = 10.135.27.1/24
+# C'est l'adresse IP virtuelle ainsi que son masque de sous réseaux que nous allons utiliser pour le VPN.
+```
