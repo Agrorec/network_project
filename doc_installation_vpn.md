@@ -296,3 +296,22 @@ Félicitation
 &nbsp;
 
 ![](https://media.giphy.com/media/xu3nTl5OdCuqs/giphy.gif)
+
+
+
+---
+
+## Vagrant
+
+Ici se trouve à disposition un Vagrantfile :
+https://catdrop.drycat.fr/r/A4Jv0_j5#IC4tklUt9q5mqAEu3SptpUdiddxWrjR29pNwHflCUy4=
+
+&nbsp;
+
+Cela va vous permettre de monter une VM Debian vanilla avec vim et git.io/vpn déjà monté.
+Pour cela il faut créer un dossier dans lequel vous insérez `Vagrantfile` puis on tape les commandes :
+- `vagrant up`
+- `vagrant ssh`
+- `./openssh_installation`
+
+Puis je vous retourne au tuto [OpenVPN](#OpenVPN)
