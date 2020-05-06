@@ -220,6 +220,8 @@ AllowedIPs = 10.135.27.20/32
 
 ---
 
+&nbsp;
+
 ### Ajout de règles IPTABLES
 
 Sur le serveur on va maintenant ajouter des règles **IPTABLES** pour autoriser le traffic à être router par le serveur.
@@ -229,13 +231,19 @@ PostUp   = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACC
 PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
 ```
 
+&nbsp;
+
 **Important** il faut autoriser la machine serveur à router le traffic pour ça on peut modifier le fichier `/proc/sys/net/ipv4/ip_forward` et passer le `0` à `1` ce qui permet de rendre ça permanent. Sinon pour que ça se réinitialise au reboot de la machine on peut taper la commande `sysctl net.ipv4.ip_forward=1`.
+
+&nbsp;
 
 ---
 
 On peut aussi définir la passerelle du client par défaut vers le serveur en modifiant la ligne `AllowedIPs = 10.135.27.1` par `AllowedIPs = 0.0.0.0/0,::0`
 
 ---
+
+&nbsp;
 
 ### Récapitulons
 
