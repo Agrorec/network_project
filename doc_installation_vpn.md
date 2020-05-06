@@ -177,3 +177,111 @@ Pensez à bien couper l'interface avec `sudo wg-quick down wg0`
 
 ### Configuration des pairs
 
+- Pour le client, on ajoute les lignes suivantes :
+La clé publique du serveur
+```bash
+PublicKey = [public.key]
+```
+
+```bash
+Endpoint = [Adresse publique:1194]
+```
+
+```bash
+AllowedIPs = 10.135.27.1/32
+```
+
+```bash
+[Peer]
+PublicKey = [public.key]
+Endpoint = [Adresse publique:1194]
+AllowedIPs = 10.135.27.1/32
+```
+
+Tout cela permet d'assigner les paquets à `AllowedIPs`, chiffrer par `PublicKey`, et à destination de `Endpoint`.
+
+&nbsp;
+
+- Pour le serveur on ajoute les lignes suivantes :
+La clé publique du client
+```bash
+PublicKey = [public.key]
+```
+
+```bash
+AllowedIPs = 10.135.27.20/32
+```
+
+```bash
+[Peer]
+PublicKey = [public.key]
+AllowedIPs = 10.135.27.20/32
+```
+
+---
+
+### Ajout de règles IPTABLES
+
+Sur le serveur on va maintenant ajouter des règles **IPTABLES** pour autoriser le traffic à être router par le serveur.
+Dans la partie `[Interface]` du fichier de configuration du serveur on ajoute les lignes suivantes :
+```bash
+PostUp   = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+```
+
+**Important** il faut autoriser la machine serveur à router le traffic pour ça on peut modifier le fichier `/proc/sys/net/ipv4/ip_forward` et passer le `0` à `1` ce qui permet de rendre ça permanent. Sinon pour que ça se réinitialise au reboot de la machine on peut taper la commande `sysctl net.ipv4.ip_forward=1`.
+
+---
+
+On peut aussi définir la passerelle du client par défaut vers le serveur en modifiant la ligne `AllowedIPs = 10.135.27.1` par `AllowedIPs = 0.0.0.0/0,::0`
+
+---
+
+### Récapitulons
+
+Nous avons donc monté à la mano notre serveur VPN avec Wireguard. Je vous joins ci-dessous les fichiers de conf avec des commentaires :
+
+- Serveur :
+```bash
+[Interface]
+# Addresse virtuelle du serveur avec son masque de sous-réseaux
+Address = 10.135.27.1/24 
+# Ici on autorise dans le firewall le fait de router le traffic (penser à changer votre interface si besoin)
+PostUp   = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+# Ici on enlève les autorisations dans le firewall pour router le traffic lorsqu'on éteint le VPN (penser à changer votre interface si besoin)
+PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+# Le port qui est en écoute pour le VPN (celui qu'on a ouvert sur notre box)
+ListenPort = 51845
+# Coller ici votre clé privé situé dans /etc/wireguard/private.key
+PrivateKey = [private.key]
+
+[Peer]
+# On entre ici la clé publique du serveur
+PublicKey = [public.key]
+# Ici on assigne les paquets
+AllowedIPs = 10.135.27.20/24
+```
+
+&nbsp;
+
+- Client :
+```bash
+[Interface]
+# Addresse virtuelle du serveur avec son masque de sous-réseaux
+Address = 10.135.27.20/24   
+# Le port qui est en écoute pour le VPN (celui qu'on a ouvert sur notre box)
+ListenPort = 51845
+# Coller ici votre clé privé situé dans /etc/wireguard/private.key
+PrivateKey = [private.key]
+
+[Peer]
+# Ici on entre l'IP publique
+Endpoint = X.X.X.X:1194
+# On entre ici la clé publique du serveur
+PublicKey = [public.key]
+# Ici on assigne les paquets
+AllowedIPs = 0.0.0.0/0
+```
+
+Félicitation
+![](https://media.giphy.com/media/xu3nTl5OdCuqs/giphy.gif)
