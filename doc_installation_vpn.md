@@ -104,7 +104,7 @@ De plus il faudra installer wireguard pour cela je vous renvoi sur la doc offici
 ---
 
 ### Génération des clés publique et privée
-Tout d'abord on va commencer par générer les clés privées et publique sur la machine serveur. Pour cela on se rend dans `/etc/wireguard` puis on tape la commande :
+Tout d'abord on va commencer par générer les clés privées et publique sur la machine serveur et la machine client. Pour cela on se rend dans `/etc/wireguard` puis on tape la commande :
 ```bash
 wg genkey | tee public.key | wg pubkey > public.key
 ```
@@ -118,5 +118,62 @@ Premièrement dans le dossier `/etc/wireguard` on crée un fichier `wg0.conf`.
 ```bash
 [Interface]
 Address = 10.135.27.1/24
-# C'est l'adresse IP virtuelle ainsi que son masque de sous réseaux que nous allons utiliser pour le VPN.
 ```
+
+&nbsp;
+
+Ensuite on ajoute le port en écoute sur le serveur :
+```bash
+ListenPort = 1194
+```
+
+&nbsp;
+
+On ajoute maintenant la clé privé à la config :
+> tips : WireGuard utilise de simples clés publiques et privées Curve25519 pour la cryptographie entre les pairs. Curve25519 a été publié pour la première fois par Daniel J. Bernstein en 2005 (source Wikipédia : https://en.wikipedia.org/wiki/Curve25519)
+```bash
+PrivateKey = [private.key]
+```
+
+&nbsp;
+
+On peut maintenant essayer de lancer l'interface avec la commande `sudo wg-quick up wg0` :
+```bash
+staz@pc ~# wg-quick up wg0
+[#] ip link add wg0 type wireguard
+[#] wg setconf wg0 /dev/fd/63
+[#] ip address add 10.135.27.1/24 dev wg0
+[#] ip link set mtu 1420 up dev wg0
+```
+
+On peut maintenant couper l'interface avec la commande `sudo wg-quick down wg0`
+
+---
+
+### Création du fichier de configuration du client
+
+On crée de nouveaux un fichier `wg0.conf` dans lequel on ajoute :
+```bash
+[Interface]
+Address = 10.135.27.20/24
+PrivateKey = [private.key]
+```
+
+On peut tester de nouveaux un `sudo wg-quick up wg0`
+```bash
+  agrorec@pc ~> wg-quick up wg0
+[#] wireguard-go utun
+...
+INFO: (utun1) 2019/01/27 14:36:58 Starting wireguard-go version 0.0.20181222
+[+] Interface for wg0 is utun1
+[#] wg setconf utun1 /dev/fd/63
+[#] ifconfig utun1 inet 10.135.27.20/24 10.135.27.20 alias
+[#] ifconfig utun1 up
+[+] Backgrounding route monitor
+```
+Pensez à bien couper l'interface avec `sudo wg-quick down wg0`
+
+---
+
+### Configuration des pairs
+
