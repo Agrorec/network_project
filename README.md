@@ -1,5 +1,5 @@
 # Projet Réseau
-Sacha Vilalonga et Valentin Lachamp
+Sacha Vilallonga et Valentin Lachamp
 ---
 ## Documentation
 
