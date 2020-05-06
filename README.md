@@ -10,6 +10,6 @@ Sacha Vilallonga et Valentin Lachamp
 
 ## Ressources utilisées
 
-- Raspberry 4.
+- Raspberry 4 (Finalement ce sera des VMs car nous avons eu un problème avec notre Raspberry).
 - OpenVPN pour le VPN.
 - Samba pour le partage de fichiers.
