@@ -304,7 +304,7 @@ Félicitation
 ## Vagrant
 
 Ici se trouve à disposition un Vagrantfile :
-https://catdrop.drycat.fr/r/A4Jv0_j5#IC4tklUt9q5mqAEu3SptpUdiddxWrjR29pNwHflCUy4=
+http://www.mediafire.com/file/3f7lzlgq4q0ohaa/Vagrantfile/file
 
 &nbsp;
 
