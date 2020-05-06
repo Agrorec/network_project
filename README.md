@@ -3,7 +3,8 @@ Sacha Vilallonga et Valentin Lachamp
 ---
 ## Documentation
 
-- [Documentation sur le plan suivi.](https://github.com/Agrorec/network_project/blob/master/plan.md)
+- [Documentation sur l'installation du VPN.](https://github.com/Agrorec/network_project/blob/master/doc_installation_vpn.md)
+- [Documentation sur l'installation du samba.](https://github.com/Agrorec/network_project/blob/master/doc_installation_samba.md)
 - [Documentation sur l'architechture du reseau.](https://github.com/Agrorec/network_project/blob/master/doc_architecture.md)
 - [Documentation d'exploitation.](https://github.com/Agrorec/network_project/blob/master/doc_exploitation.md)
 
