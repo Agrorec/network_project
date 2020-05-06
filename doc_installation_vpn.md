@@ -18,7 +18,6 @@ Rendez-vous dans la partie `Réseaux`, puis `NAT/PAT`, enfin choississez le port
 ---
 
 &nbsp;
-
 Tout d'abord on tape la commande :
 ```bash
 wget git.io/vpn -O openvpn_install.sh && bash openvpn_install.sh
@@ -29,6 +28,8 @@ wget git.io/vpn -O openvpn_install.sh && bash openvpn_install.sh
 
 ---
 
+&nbsp;
+
 1. Ici on renseigne l'ip publique sur laquelle on doit taper pour accéder à notre vpn depuis un réseau extérieur. Si votre adresse IP se modifient vous pouvez mettre un nom de domain cela permettre que le nom de domaine suive l'IP.
 ```bash
 This server is behind NAT. What is the public IPv4 address or hostname?
@@ -36,6 +37,7 @@ Public IPv4 address / hostname [X;X;X;X] :
 ```
 
 &nbsp;
+
 2. Ici on choisit le protocole de communication (Ici on préfera choisir UDP) cela permettre une connexion plus rapide, et les echanges sont déjà sécuriser grâce au VPN.
 ```bash
 Which protocol do you want for OpenVPN connections?
@@ -45,6 +47,7 @@ Which protocol do you want for OpenVPN connections?
 ```
 
 &nbsp;
+
 3. On choisit ici le port qu'on a ouvert sur notre box (ici 1194 est le port par défaut d'OpenVPN)
 ```bash
 What port do you want OpenVPN listening to?
@@ -52,6 +55,7 @@ Port [1194]:
 ```
 
 &nbsp;
+
 4. Maintenant on choisis le DNS (ici on peut laisser par défaut)
 ```bash
 Which DNS do you want to use with the VPN?
@@ -65,6 +69,7 @@ DNS [1]:
 ```
 
 &nbsp;
+
 5. Enfin on choisis le premier "client" qui pourra se connecter au VPN.
 ```
 Finally, tell me a name for the client certificate.
@@ -74,6 +79,7 @@ Client name [client]:
 &nbsp;
 Appuyez de nouveau sur `Entrée` et comme par magie votre vpn va se monter.
 &nbsp;
+
 Maintenant on peut copier coller le contenue de `clientVPN` ou le transferer sur un autre PC, et lancer le fichier de config `client OpenVPN` depuis un autre réseaux et vérifier que la connexion s'établit bien.
 
 Bien joué votre VPN est bien monté 
