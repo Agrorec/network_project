@@ -28,7 +28,7 @@ Public IPv4 address / hostname [X;X;X;X] :
 ```
 
 &nbsp;
-2. Ici on choisis le protocole de communication (Ici on préfera choisir UDP) cela permettre une connexion plus rapide, et les echanges sont déjà sécuriser grâce au VPN.
+2. Ici on choisit le protocole de communication (Ici on préfera choisir UDP) cela permettre une connexion plus rapide, et les echanges sont déjà sécuriser grâce au VPN.
 ```bash
 Which protocol do you want for OpenVPN connections?
   1) UDP (recommended)
@@ -68,4 +68,4 @@ Appuyez de nouveau sur `Entrée` et comme par magie votre vpn va se monter.
 &nbsp;
 Maintenant on peut copier coller le contenue de `clientVPN` ou le transferer sur un autre PC, et lancer le fichier de config `client OpenVPN` depuis un autre réseaux et vérifier que la connexion s'établit bien.
 
-Bien joué votre VPN est bien monté :thumbs_up:
+Bien joué votre VPN est bien monté 
