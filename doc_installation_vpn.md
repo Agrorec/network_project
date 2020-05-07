@@ -5,7 +5,7 @@
 
 ## OpenVPN
 Tout d'abord il y a plusieurs façons d'installer OpenVPN. On peut le faire à la mano, utiliser PIVPN, ou alors on peut se servir d'une technique digne des plus grands flemmards (il vaut mieux s'assurer de comprendre comment un VPN fonctionne avant d'utiliser cette technique) :
-On va utiliser le dernier exemple. Pour cela on part d'une VM Debian vierge connectée en réseau host-only:
+On va utiliser le dernier exemple. Pour cela on part d'une VM Debian vierge connectée en réseau host-only :
 
 
 ### Prérequis :
