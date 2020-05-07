@@ -308,6 +308,24 @@ http://www.mediafire.com/file/3f7lzlgq4q0ohaa/Vagrantfile/file
 
 &nbsp;
 
+```bash
+Vagrant.configure("2") do |config|
+  config.vm.box = "debian/stretch64"
+
+  config.vm.network "forwarded_port", guest:1194, host: 1194, protocol: "udp"
+
+  config.vm.provision "shell", inline: <<-SHELL
+	apt update
+	apt upgrade -y
+	apt install vim -y
+	wget https://git.io/vpn -O openvpn_installation.sh
+	chmod +x openvpn_installation.sh
+  SHELL
+end
+```
+
+&nbsp;
+
 Cela va vous permettre de monter une VM Debian vanilla avec vim et git.io/vpn déjà monté.
 Pour cela il faut créer un dossier dans lequel vous insérez `Vagrantfile` puis on tape les commandes :
 - `vagrant up`
