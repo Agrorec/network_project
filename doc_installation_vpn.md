@@ -23,7 +23,7 @@ Tout d'abord on tape la commande :
 wget git.io/vpn -O openvpn_install.sh && bash openvpn_install.sh
 ```
 
-- **-O openvpn_install.sh :** permet de sauvgarder ce qu'on télécharge dans un fichier
+- **-O openvpn_install.sh :** permet de sauvegarder ce qu'on télécharge dans un fichier
 - **&& bash openvpn_install.sh** : si la commande d'avant a fonctionné, cela permet de lancer le script
 
 ---
